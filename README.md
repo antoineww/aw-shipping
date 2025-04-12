@@ -1,36 +1,163 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Antoine Wiles Shipping App
 
-## Getting Started
+Project can be hosted run via cloud; via GitHub Codespace,
+follow and use the given Codespace url: [Check this Codespace](http://localhost:3000).
 
-First, run the development server:
+- Otherwise install locally as seen below:
 
-```bash
+### Local setup
+- Clone repo
+- Install libs
+```
+npm install
+```
+- Run this application
+```
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Design Decisions:
+### UI:
+- Using Material Design
+### Coding conversions:
+`Developing for scalability & good documentation`
+- Have designated folders for key areas (Eg: /components, /pages, /data )
+- Keep 1 class file, until class grows to need to be modularized into a folder  with `index.js` and its sub-files
+- Keep /components purely functional with default props and/or self-state to ensure reusability with prop overwrite. Only use data injection in /pages.
+- `Title-case + camelcase` on /components, `lowercase + camelcase` everywhere else
+- Make variables simple to read and descriptive enough yet not overwhelming too read
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+#
+# TODO CRITERIA CHECKLIST:
 
-To learn more about Next.js, take a look at the following resources:
+- [ ] ASA-1: Skeleton Layout
+  - [ ] Common Reusable Components
+  - [ ] Folder & Files Layout scheme
+- [ ] ASA-2: Styling & UI/UX Design
+  - [ ] Material UI
+  - [ ] Color Palette
+- [ ] ASA-3: Pages
+  - [ ] Dashboard
+  - [ ] Debug:
+    - [ ] KitchenSink for UI
+    - [ ] Testing folder
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎯 OBJECTIVES
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Build a full-stack application that allows users to:
 
-## Deploy on Vercel
+- [ ] Upload a CSV file containing freight shipment details
+- [ ] Process and validate the data
+- [ ] Display insights via a dashboard
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📦 REQUIREMENTS
+
+### 1. ASA-4: Backend (Required)
+
+The backend should accept a CSV file containing freight shipment data. You've been provided with the file `shipment_data.csv`. The structure of the data is defined in the `structure.md` file.
+
+Develop an API using **TypeScript** hat:
+
+#### ✅ Processes the Data
+
+- [ ] **Validation and Cleaning**
+
+  - [ ] Remove duplicates
+  - [ ] Handle missing values if necessary
+
+- [ ] **Key Calculations**
+
+  - [ ] **Cargo Consolidation**  
+    Suggest shipments that can be grouped by destination and departure date.
+  - [ ] **Warehouse Utilization**  
+    Show occupied vs. available warehouse space.  
+    Assume total warehouse capacity is `60,000,000,000 cm³`.
+
+    Formula:
+
+    ```
+    Utilization = (Total Volume of Shipments / Total Warehouse Capacity) * 100
+    ```
+
+#### ✅ Provides API Endpoints
+
+- [ ] Uploading CSV files (can be stored in file system)
+- [ ] Retrieving shipment insights (metrics)
+- [ ] Fetching individual shipment details
+
+---
+
+### 2. ASA-5: Frontend (Required – preferably using Next.js/React)
+
+Build a UI that allows users to:
+
+- [ ] **Upload CSV Files**
+
+  - [ ] Users should be able to upload the shipment data for processing.
+
+- [ ] **Dashboard with Visual Insights**
+
+  - [ ] **Summary Statistics**
+
+    - [ ] Total shipments
+    - [ ] On-time vs. delayed shipments
+    - [ ] Warehouse usage
+
+  - [ ] **Charts and Graphs**
+
+    - [ ] **Bar Chart**
+      - [ ] Received count per carrier, per day
+      - [ ] (Bonus: Any other useful metrics)
+    - [ ] **Pie Chart**
+      - [ ] Shipment volume by mode (air or sea)
+      - [ ] Current warehouse utilization rate
+    - [ ] **Line Chart** (Optional)
+      - [ ] Warehouse capacity over the year  
+        (x-axis: date, y-axis: number of packages received per day)
+    - [ ] (Bonus: Any other useful metrics)
+
+  - [ ] **Shipment Management Table**
+
+    - [ ] Search and filter shipments by:
+      - [ ] Status
+      - [ ] Destination
+      - [ ] Carrier
+    - [ ] Click a shipment to view details
+
+  - [ ] **Consolidation Recommendations** (Optional)
+    - [ ] Display groupable shipments
+    - [ ] Allow users to apply filters and generate a scoped CSV file
+
+---
+
+### 3. ASA-6: Additional Considerations
+
+- [ ] Handle CSV files efficiently (assume over **1 million rows**)
+- [ ] Ensure good **UI/UX design**
+- [x] Provide **clear documentation** on setup and usage
+
+---
+
+## 🧪 EVALUATION CRITERIA
+
+- [ ] **Frontend:** Usability, design, and data visualization quality
+- [ ] **Backend:** API structure and data processing efficiency
+- [ ] **Scalability:** Ability to handle large datasets efficiently
+- [ ] **Documentation & Code Quality**
+
+---
+
+## 📦 DELIVERABLES
+
+- [x] A GitHub repository with your code  
+  (Alternatively, a download link to a zip file)
+- [x] A `README` explaining:
+  - [x] How to set up and run the project
+  - [x] Your design decisions
+  - [ ] Any trade-offs or assumptions made
