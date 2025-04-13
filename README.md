@@ -41,7 +41,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
   - [x] Material UI
   - [x] Color Palette
 - [ ] ASA-3: Pages
-  - [ ] Dashboard
+  - [x] Dashboard
   - [ ] Debug:
     - [x] KitchenSink for UI
     - [ ] Testing folder
