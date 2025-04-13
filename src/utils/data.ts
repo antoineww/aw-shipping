@@ -6,6 +6,7 @@ import { PrismaClient } from "@prisma/client"
 
 const prisma = new PrismaClient()
 const UPLOAD_DIR = join(process.cwd(), "uploads")
+const WAREHOUSE_CAPACITY = 60000000000 // 60 billion cm volume
 
 const createDirIfNotExists = async (path: string) => {
   try {
@@ -80,4 +81,94 @@ export const dbStore = async (records: any) => {
   }
 
   return insertedCount
+}
+
+export const dbReadShipmentMetrics = async () => {
+  const [
+    totalShipments,
+    shipmentsByStatus,
+    shipmentsByCarrier,
+    shipmentsByMode,
+    totalVolume,
+    shipmentsByDate,
+  ] = await Promise.all([
+    prisma.shipment.count(),
+    prisma.shipment.groupBy({
+      by: ["status"],
+      _count: true,
+    }),
+    prisma.shipment.groupBy({
+      by: ["carrier"],
+      _count: true,
+    }),
+    prisma.shipment.groupBy({
+      by: ["mode"],
+      _sum: {
+        volume: true,
+      },
+    }),
+    prisma.shipment.aggregate({
+      _sum: {
+        volume: true,
+      },
+    }),
+    prisma.shipment.groupBy({
+      by: ["arrival_date"],
+      _count: true,
+      orderBy: {
+        arrival_date: "asc",
+      },
+    }),
+  ])
+
+  const warehouseUtilization =
+    ((totalVolume._sum.volume || 0) / WAREHOUSE_CAPACITY) * 100
+
+  return {
+    totalShipments,
+    shipmentsByStatus,
+    shipmentsByCarrier,
+    shipmentsByMode,
+    totalVolume,
+    shipmentsByDate,
+
+    warehouseUtilization,
+  }
+}
+
+interface ConsolidationGroup {
+  destination: string
+  departure_date: Date
+  _count: {
+    shipment_id: number
+  }
+}
+
+export const dbReadConsolidationOpportunities = async () => {
+  const consolidationGroups = (await prisma.shipment.groupBy({
+    by: ["destination", "departure_date"],
+    having: {
+      departure_date: {
+        not: null,
+      },
+    },
+    _count: {
+      shipment_id: true,
+    },
+    where: {
+      departure_date: {
+        not: null,
+      },
+    },
+  })) as ConsolidationGroup[]
+
+  const consolidationOpportunities = consolidationGroups
+    .filter((group: ConsolidationGroup) => group._count.shipment_id > 1)
+    .map((group: ConsolidationGroup) => ({
+      destination: group.destination,
+      departure_date: group.departure_date,
+      shipment_count: group._count.shipment_id,
+    }))
+
+  return { consolidationOpportunities }
 }
