@@ -1,7 +1,5 @@
 "use client"
 
-import { useSummaryStatistics } from "./useSummaryStatistics"
-
 const DEFAULT_STATS = {
   totalShipments: 0,
   warehouseUtilization: 0,
@@ -9,8 +7,7 @@ const DEFAULT_STATS = {
   consolidationOpportunities: [],
 }
 
-export const SummaryStatistics = () => {
-  const { shipmentData } = useSummaryStatistics()
+export const SummaryStatistics = ({ shipmentData }) => {
   const { totalShipments, warehouseUtilization, shipmentsByStatus,consolidationOpportunities } =
     shipmentData || DEFAULT_STATS
 

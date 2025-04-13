@@ -1,11 +1,13 @@
+"use client"
+
 import { ShipmentData } from "@/app/api/metrics/route"
 import { useState, useEffect } from "react"
 
 const fetchMetrics = async () => {
   try {
     const response = await fetch("/api/metrics")
-    const metrics = await response.json()
-    console.log({metrics})
+    const metrics: ShipmentData = await response.json()
+
     return metrics
   } catch (error) {
     console.error("Error fetching metrics:", error)
@@ -13,7 +15,7 @@ const fetchMetrics = async () => {
   return null
 }
 
-export const useSummaryStatistics = () => {
+export const useStateControllerMetrics = () => {
   const [shipmentData, setShipmentData] = useState<ShipmentData | null>(null)
 
   useEffect(() => {
