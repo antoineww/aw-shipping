@@ -1,9 +1,6 @@
-"use client"
-
 import { useState, useRef } from "react"
-import Button from "@mui/material/Button"
 
-export default function FileUpload({ onSuccess = (a: any) => {} }) {
+export const useFileUpload = ({ onSuccess = (a: any) => {} }) => {
   const [isUploading, setIsUploading] = useState(false)
   const [uploadedFileName, setUploadedFileName] = useState("")
   const fileInputRef = useRef(null)
@@ -45,20 +42,11 @@ export default function FileUpload({ onSuccess = (a: any) => {} }) {
     }
   }
 
-  return (
-    <div>
-      <Button variant="outlined" onClick={handleButtonClick}>
-        Upload CSV
-      </Button>
-      <input
-        type="file"
-        className="hidden"
-        accept=".csv"
-        onChange={handleFileUpload}
-        disabled={isUploading}
-        ref={fileInputRef}
-      />
-      <p>{uploadedFileName}</p>
-    </div>
-  )
+  return {
+    handleButtonClick,
+    handleFileUpload,
+    isUploading,
+    fileInputRef,
+    uploadedFileName,
+  }
 }
