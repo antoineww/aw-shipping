@@ -1,18 +1,19 @@
 "use client"
 
 import Button from "@mui/material/Button"
+import Backdrop from "@mui/material/Backdrop"
+import CircularProgress from "@mui/material/CircularProgress"
 import { useFileUpload } from "./useFileUpload"
 
 export default function FileUpload({ onSuccess = (a: any) => {} }) {
-
   const {
     handleButtonClick,
     handleFileUpload,
     isUploading,
     fileInputRef,
     uploadedFileName,
-  } = useFileUpload({onSuccess})
- 
+  } = useFileUpload({ onSuccess })
+
   return (
     <div>
       <Button variant="outlined" onClick={handleButtonClick}>
@@ -27,7 +28,14 @@ export default function FileUpload({ onSuccess = (a: any) => {} }) {
         ref={fileInputRef}
       />
       <p>{uploadedFileName}</p>
-      
+
+      <Backdrop
+        sx={(theme) => ({ color: "#fff", zIndex: theme.zIndex.drawer + 1 })}
+        open={isUploading}
+      >
+        <CircularProgress color="inherit" sx={{ position: "absolute" }} />
+        <h4>Uploading</h4>
+      </Backdrop>
     </div>
   )
 }

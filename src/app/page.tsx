@@ -5,10 +5,11 @@ import Typography from "@mui/material/Typography"
 import Box from "@mui/material/Box"
 import Container from "@mui/material/Container"
 import ControlledAccordion from "@/components/Globals/ControlledAccordion"
+import FileUpload from "@/components/Templates/FileUpload"
 
 export default function Home() {
   return (
-    <div className="">
+    <div>
       <AppBar>
         <Toolbar>
           <Typography variant="h4" component="div">
@@ -21,7 +22,7 @@ export default function Home() {
       <Container>
         <Box sx={{ my: 2 }}>
           <ControlledAccordion>
-            <div title="Upload CSV Files"></div>
+            <FileUpload  title="Upload CSV Files"/>
           </ControlledAccordion>
 
           <Toolbar>
