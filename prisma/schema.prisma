@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./awshipping.db"
+}
+
+model Shipment {
+  id             Int      @id @default(autoincrement())
+  shipment_id    Int      @unique
+  customer_id    Int
+  origin         String
+  destination    String
+  weight         Int
+  volume         Int
+  carrier        String
+  mode           String
+  status         String
+  arrival_date   DateTime
+  departure_date DateTime?
+  delivered_date DateTime?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+} 
