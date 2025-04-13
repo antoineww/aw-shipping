@@ -50,7 +50,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 Build a full-stack application that allows users to:
 
-- [ ] Upload a CSV file containing freight shipment details
+- [x] Upload a CSV file containing freight shipment details
 - [ ] Process and validate the data
 - [ ] Display insights via a dashboard
 
@@ -62,13 +62,13 @@ Build a full-stack application that allows users to:
 
 The backend should accept a CSV file containing freight shipment data. You've been provided with the file `shipment_data.csv`. The structure of the data is defined in the `structure.md` file.
 
-Develop an API using **TypeScript** hat:
+Develop an API using **TypeScript** that:
 
 #### ✅ Processes the Data
 
 - [ ] **Validation and Cleaning**
 
-  - [ ] Remove duplicates
+  - [x] Remove duplicates
   - [ ] Handle missing values if necessary
 
 - [ ] **Key Calculations**
@@ -87,7 +87,7 @@ Develop an API using **TypeScript** hat:
 
 #### ✅ Provides API Endpoints
 
-- [ ] Uploading CSV files (can be stored in file system)
+- [x] Uploading CSV files (can be stored in file system)
 - [ ] Retrieving shipment insights (metrics)
 - [ ] Fetching individual shipment details
 
@@ -97,9 +97,9 @@ Develop an API using **TypeScript** hat:
 
 Build a UI that allows users to:
 
-- [ ] **Upload CSV Files**
+- [x] **Upload CSV Files**
 
-  - [ ] Users should be able to upload the shipment data for processing.
+  - [x] Users should be able to upload the shipment data for processing.
 
 - [ ] **Dashboard with Visual Insights**
 
