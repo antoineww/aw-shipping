@@ -6,7 +6,9 @@ const DEFAULT_STATS = {
   totalShipments: 0,
   warehouseUtilization: 0,
   shipmentsByStatus: [],
+  consolidationOpportunities: [],
 }
+
 export const SummaryStatistics = () => {
   const { shipmentData } = useSummaryStatistics()
   const { totalShipments, warehouseUtilization, shipmentsByStatus,consolidationOpportunities } =
