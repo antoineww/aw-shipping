@@ -75,7 +75,7 @@ Develop an API using **TypeScript** that:
 
   - [ ] **Cargo Consolidation**  
     Suggest shipments that can be grouped by destination and departure date.
-  - [ ] **Warehouse Utilization**  
+  - [x] **Warehouse Utilization**  
     Show occupied vs. available warehouse space.  
     Assume total warehouse capacity is `60,000,000,000 cm³`.
 
@@ -88,7 +88,7 @@ Develop an API using **TypeScript** that:
 #### ✅ Provides API Endpoints
 
 - [x] Uploading CSV files (can be stored in file system)
-- [ ] Retrieving shipment insights (metrics)
+- [x] Retrieving shipment insights (metrics)
 - [ ] Fetching individual shipment details
 
 ---
@@ -101,13 +101,13 @@ Build a UI that allows users to:
 
   - [x] Users should be able to upload the shipment data for processing.
 
-- [ ] **Dashboard with Visual Insights**
+- [x] **Dashboard with Visual Insights**
 
   - [ ] **Summary Statistics**
 
-    - [ ] Total shipments
-    - [ ] On-time vs. delayed shipments
-    - [ ] Warehouse usage
+    - [x] Total shipments
+    - [x] On-time vs. delayed shipments
+    - [x] Warehouse usage
 
   - [ ] **Charts and Graphs**
 
@@ -160,4 +160,6 @@ Build a UI that allows users to:
 - [x] A `README` explaining:
   - [x] How to set up and run the project
   - [x] Your design decisions
-  - [ ] Any trade-offs or assumptions made
+  - [x] Any trade-offs or assumptions made:
+    - using SQLite for demo purposes; BUT Postgres is ideal for this job; has built-in pagination, metrics & REST API capabitlies to handles huge sums of data; requiring less code handling
+    - Need to test&find load size csv files and metrics calcutions
