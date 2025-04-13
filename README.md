@@ -37,9 +37,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - [ ] ASA-1: Skeleton Layout
   - [ ] Common Reusable Components
   - [ ] Folder & Files Layout scheme
-- [ ] ASA-2: Styling & UI/UX Design
-  - [ ] Material UI
-  - [ ] Color Palette
+- [x] ASA-2: Styling & UI/UX Design
+  - [x] Material UI
+  - [x] Color Palette
 - [ ] ASA-3: Pages
   - [ ] Dashboard
   - [ ] Debug:
