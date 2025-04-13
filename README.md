@@ -34,16 +34,16 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 #
 # TODO CRITERIA CHECKLIST:
 
-- [ ] ASA-1: Skeleton Layout
-  - [ ] Common Reusable Components
-  - [ ] Folder & Files Layout scheme
+- [x] ASA-1: Skeleton Layout
+  - [x] Common Reusable Components
+  - [x] Folder & Files Layout scheme
 - [x] ASA-2: Styling & UI/UX Design
   - [x] Material UI
   - [x] Color Palette
 - [ ] ASA-3: Pages
   - [ ] Dashboard
   - [ ] Debug:
-    - [ ] KitchenSink for UI
+    - [x] KitchenSink for UI
     - [ ] Testing folder
 
 ## 🎯 OBJECTIVES
