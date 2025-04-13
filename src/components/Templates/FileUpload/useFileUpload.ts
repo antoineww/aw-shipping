@@ -1,3 +1,4 @@
+import { UploadResponse } from "@/app/api/upload/route"
 import { useState, useRef } from "react"
 
 export const useFileUpload = ({ onSuccess = (a: any) => {} }) => {
@@ -23,12 +24,12 @@ export const useFileUpload = ({ onSuccess = (a: any) => {} }) => {
         method: "POST",
         body: formData,
       })
-      const data = await response.json()
+      const data: UploadResponse = await response.json()
+      data.filename = file.name
 
-      if (data.message) {
-        onSuccess(data)
-        console.log({ data })
-      }
+      setUploadedFileName(JSON.stringify(data, null, 2))
+      onSuccess(data)
+
     } catch (error) {
       console.error("Error uploading file:", error)
     } finally {

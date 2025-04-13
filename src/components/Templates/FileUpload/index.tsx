@@ -27,7 +27,7 @@ export default function FileUpload({ onSuccess = (a: any) => {} }) {
         disabled={isUploading}
         ref={fileInputRef}
       />
-      <p>{uploadedFileName}</p>
+      <pre>{uploadedFileName}</pre>
 
       <Backdrop
         sx={(theme) => ({ color: "#fff", zIndex: theme.zIndex.drawer + 1 })}
