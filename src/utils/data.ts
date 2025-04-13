@@ -172,3 +172,38 @@ export const dbReadConsolidationOpportunities = async () => {
 
   return { consolidationOpportunities }
 }
+
+export interface ShipmentsPaginatedSearch {
+  status: string | null
+  destination: string | null
+  carrier: string | null
+  page: number
+  limit: number
+}
+export const dbReadShipmentsPaginated = async ({
+  status,
+  destination,
+  carrier,
+  page,
+  limit,
+}: ShipmentsPaginatedSearch) => {
+  const where = {
+    ...(status && { status }),
+    ...(destination && { destination }),
+    ...(carrier && { carrier }),
+  }
+
+  const [shipments, total] = await Promise.all([
+    prisma.shipment.findMany({
+      where,
+      skip: (page - 1) * limit,
+      take: limit,
+      orderBy: {
+        arrival_date: "desc",
+      },
+    }),
+    prisma.shipment.count({ where }),
+  ])
+
+  return [shipments, total]
+}
