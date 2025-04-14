@@ -55,7 +55,7 @@ export const ChartsAndGraphs = (props) => {
     ),
     datasets: [
       {
-        label: "Daily Shipments",
+        label: "Daily Shipments/Packages",
         data: shipmentData.shipmentsByDate.map((item) => item._count),
         borderColor: "rgb(75, 192, 192)",
         tension: 0.1,

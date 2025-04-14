@@ -11,6 +11,7 @@ import FileUpload from "@/components/Templates/FileUpload"
 import { SummaryStatistics } from "@/components/Templates/SummaryStatistics"
 import { useStateControllerMetrics } from "@/hooks/useStateControllerMetrics"
 import { ChartsAndGraphs } from "@/components/Templates/ChartsAndGraphs"
+import { ConsolidationRecommendations } from "@/components/Templates/ConsolidationRecommendations"
 
 export default function Home() {
   const { shipmentData } = useStateControllerMetrics()
@@ -49,7 +50,10 @@ export default function Home() {
             </div>
 
             <div title="Shipment Management Table"></div>
-            <div title="Consolidation Recommendations"></div>
+
+            <div title="Consolidation Recommendations">
+              <ConsolidationRecommendations shipmentData={shipmentData} />
+            </div>
           </ControlledAccordion>
         </Box>
       </Container>
