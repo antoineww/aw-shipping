@@ -10,6 +10,7 @@ import {
 
 export interface UploadResponse {
   filename?: string
+  elapsedTime?: string
   message: string
   recordsProcessed: number
 }

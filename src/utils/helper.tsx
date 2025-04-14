@@ -64,6 +64,15 @@ export const getJSONDataView = (data: any) => {
   return getJSONDataView_BareMinimum(data)
 }
 
+export const getElapsedTime = (startTime:number, endTime:number) => {
+  const timeTakenMs = endTime - startTime
+
+  const totalSeconds = Math.floor(timeTakenMs / 1000)
+  const minutes = Math.floor(totalSeconds / 60)
+  const seconds = totalSeconds % 60
+
+  return `${minutes} minute(s) and ${seconds} second(s)`
+}
 export const getTimestamp = () => {
   const now = new Date()
 

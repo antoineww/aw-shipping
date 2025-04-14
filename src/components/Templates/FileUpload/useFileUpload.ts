@@ -1,4 +1,5 @@
 import { UploadResponse } from "@/app/api/upload/route"
+import { getElapsedTime } from "@/utils/helper"
 import { useState, useRef } from "react"
 
 export const useFileUpload = ({ onSuccess = (a: any) => {} }) => {
@@ -9,6 +10,7 @@ export const useFileUpload = ({ onSuccess = (a: any) => {} }) => {
   const handleFileUpload = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
+    const startTime = performance.now()
     const file = event.target.files?.[0]
     if (!file) return
 
@@ -26,6 +28,8 @@ export const useFileUpload = ({ onSuccess = (a: any) => {} }) => {
       })
       const data: UploadResponse = await response.json()
       data.filename = file.name
+      const endTime = performance.now()
+      data.elapsedTime = getElapsedTime(startTime, endTime)
 
       setuploadedFileData(data)
       onSuccess(data)
