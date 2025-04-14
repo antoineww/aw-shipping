@@ -59,10 +59,15 @@ export const getJSONDataView_ButtonGroups = (data: any) => {
 
 export const getJSONDataView = (data: any) => {
   try {
-    if (!Array.isArray(data) && Object.keys(data).length > 0)
-      return getJSONDataView_ButtonGroups(data)
+    if (!Array.isArray(data)) {
+      if (Object.keys(data).length > 0) {
+        return getJSONDataView_ButtonGroups(data)
+      }
+    } else {
+      return getJSONDataView_BareMinimum(data)
+    }
   } catch (error) {}
-  return getJSONDataView_BareMinimum(data)
+  return null
 }
 
 export const getElapsedTime = (startTime: number, endTime: number) => {
@@ -94,6 +99,8 @@ export const generateFilename = (baseFilename = "data", extension = "csv") => {
 }
 
 export const downloadCSV = (data, filename = "data.csv") => {
+  if (!Array.isArray(data) || data.length < 1) return
+
   const csvRows = []
   const headers = Object.keys(data[0])
   csvRows.push(headers.join(","))
