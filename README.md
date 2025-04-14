@@ -42,9 +42,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - [x] ASA-2: Styling & UI/UX Design
   - [x] Material UI
   - [x] Color Palette
-- [ ] ASA-3: Pages
+- [x] ASA-3: Pages
   - [x] Dashboard
-  - [ ] Debug:
+  - [x] Debug:
     - [x] KitchenSink for UI
     - [ ] Testing folder
 
@@ -53,7 +53,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 Build a full-stack application that allows users to:
 
 - [x] Upload a CSV file containing freight shipment details
-- [ ] Process and validate the data
+- [x] Process and validate the data
 - [x] Display insights via a dashboard
 
 ---
@@ -73,9 +73,9 @@ Develop an API using **TypeScript** that:
   - [x] Remove duplicates
   - [ ] Handle missing values if necessary
 
-- [ ] **Key Calculations**
+- [x] **Key Calculations**
 
-  - [ ] **Cargo Consolidation**  
+  - [x] **Cargo Consolidation**  
     Suggest shipments that can be grouped by destination and departure date.
   - [x] **Warehouse Utilization**  
     Show occupied vs. available warehouse space.  
@@ -111,7 +111,7 @@ Build a UI that allows users to:
     - [x] On-time vs. delayed shipments
     - [x] Warehouse usage
 
-  - [ ] **Charts and Graphs**
+  - [x] **Charts and Graphs**
 
     - [xx] **Bar Chart**
       - [x] Received count per carrier, per day
@@ -132,8 +132,8 @@ Build a UI that allows users to:
       - [ ] Carrier
     - [ ] Click a shipment to view details
 
-  - [ ] **Consolidation Recommendations** (Optional)
-    - [ ] Display groupable shipments
+  - [x] **Consolidation Recommendations** (Optional)
+    - [x] Display groupable shipments
     - [ ] Allow users to apply filters and generate a scoped CSV file
 
 ---
@@ -150,7 +150,7 @@ Build a UI that allows users to:
 
 - [x] **Frontend:** Usability, design, and data visualization quality
 - [x] **Backend:** API structure and data processing efficiency
-- [ ] **Scalability:** Ability to handle large datasets efficiently
+- [x] **Scalability:** Ability to handle large datasets efficiently
 - [x] **Documentation & Code Quality**
 
 ---
