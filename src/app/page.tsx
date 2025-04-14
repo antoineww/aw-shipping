@@ -11,10 +11,13 @@ import FileUpload from "@/components/Templates/FileUpload"
 import { SummaryStatistics } from "@/components/Templates/SummaryStatistics"
 import { useStateControllerMetrics } from "@/hooks/useStateControllerMetrics"
 import { ChartsAndGraphs } from "@/components/Templates/ChartsAndGraphs"
+import { useStateControllerShipments } from "@/hooks/useStateControllerShipments"
 import { ConsolidationRecommendations } from "@/components/Templates/ConsolidationRecommendations"
+import ShipmentManagementTable from "@/components/Templates/ShipmentManagementTable"
 
 export default function Home() {
   const { shipmentData } = useStateControllerMetrics()
+  const stateControllerShipments = useStateControllerShipments()
 
   return (
     <div>
@@ -49,8 +52,11 @@ export default function Home() {
               <ChartsAndGraphs shipmentData={shipmentData} />
             </div>
 
-            <div title="Shipment Management Table"></div>
+            <div title="Shipment Management Table">
+              <ShipmentManagementTable {...stateControllerShipments}/>
 
+            </div>
+            
             <div title="Consolidation Recommendations">
               <ConsolidationRecommendations shipmentData={shipmentData} />
             </div>
