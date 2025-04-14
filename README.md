@@ -10,8 +10,8 @@ OR
 2. Install libs & setup Sqlite db 
 ```
 npm install
-npm prisma generate
-npm prisma db push
+npx prisma generate
+npx prisma db push
 ```
 3. Run this application in dev mode
 ```
