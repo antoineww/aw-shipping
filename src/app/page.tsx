@@ -16,8 +16,8 @@ import { ConsolidationRecommendations } from "@/components/Templates/Consolidati
 import ShipmentManagementTable from "@/components/Templates/ShipmentManagementTable"
 
 export default function Home() {
-  const { shipmentData } = useStateControllerMetrics()
   const stateControllerShipments = useStateControllerShipments()
+  const { shipmentData } = useStateControllerMetrics(stateControllerShipments.currentPage, stateControllerShipments.filters)
 
   return (
     <div>

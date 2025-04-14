@@ -15,12 +15,17 @@ const fetchMetrics = async () => {
   return null
 }
 
-export const useStateControllerMetrics = () => {
+export const useStateControllerMetrics = (currentPage: any, filters: any) => {
   const [shipmentData, setShipmentData] = useState<ShipmentData | null>(null)
 
   useEffect(() => {
-    const setData = async () => setShipmentData(await fetchMetrics())
-    setData()
+    setData_fetchMetrics()
+  }, [currentPage, filters])
+
+  const setData_fetchMetrics = async () => setShipmentData(await fetchMetrics())
+
+  useEffect(() => {
+    setData_fetchMetrics()
   }, [])
 
   return { shipmentData }
