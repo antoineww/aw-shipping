@@ -20,10 +20,14 @@ import {
   DESTINATION_TYPES_SHIPMENTS,
   downloadCSV,
   generateFilename,
+  getJSONDataView,
   STATUS_TYPES_SHIPMENTS,
 } from "@/utils/helper"
 import Button from "@mui/material/Button"
 import DownloadIcon from "@mui/icons-material/Download"
+
+import Typography from "@mui/material/Typography"
+import Modal from "@mui/material/Modal"
 
 interface ShipmentManagementTableProps {
   shipments: Shipment[]
@@ -53,6 +57,10 @@ export default function ShipmentManagementTable({
     destination: "",
     carrier: "",
   })
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
+  const [currentShipment, setCurrentShipment] = useState({})
 
   const handleFilterChange = (key: keyof typeof filters, value: string) => {
     const newFilters = { ...filters, [key]: value }
@@ -136,7 +144,17 @@ export default function ShipmentManagementTable({
                 key={shipment.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell>{shipment.shipment_id}</TableCell>
+                <TableCell>
+                  <Button
+                    variant="outlined"
+                    onClick={() => {
+                      setCurrentShipment(shipment)
+                      handleOpen()
+                    }}
+                  >
+                    {shipment.shipment_id}
+                  </Button>
+                </TableCell>
                 <TableCell>{shipment.customer_id}</TableCell>
                 <TableCell>{shipment.origin}</TableCell>
                 <TableCell>{shipment.destination}</TableCell>
@@ -193,6 +211,34 @@ export default function ShipmentManagementTable({
           color="primary"
         />
       </Box>
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            // width: 400,
+            bgcolor: "background.paper",
+            border: "2px solid #000",
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Shipment
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            {getJSONDataView(currentShipment)}
+          </Typography>
+        </Box>
+      </Modal>
     </Box>
   )
 }

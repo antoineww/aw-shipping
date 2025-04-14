@@ -59,12 +59,13 @@ export const getJSONDataView_ButtonGroups = (data: any) => {
 
 export const getJSONDataView = (data: any) => {
   try {
-    if (!Array.isArray(data)) return getJSONDataView_ButtonGroups(data)
+    if (!Array.isArray(data) && Object.keys(data).length > 0)
+      return getJSONDataView_ButtonGroups(data)
   } catch (error) {}
   return getJSONDataView_BareMinimum(data)
 }
 
-export const getElapsedTime = (startTime:number, endTime:number) => {
+export const getElapsedTime = (startTime: number, endTime: number) => {
   const timeTakenMs = endTime - startTime
 
   const totalSeconds = Math.floor(timeTakenMs / 1000)
