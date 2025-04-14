@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react"
 import AppBar from "@mui/material/AppBar"
 import Toolbar from "@mui/material/Toolbar"
@@ -7,8 +9,12 @@ import Container from "@mui/material/Container"
 import ControlledAccordion from "@/components/Globals/ControlledAccordion"
 import FileUpload from "@/components/Templates/FileUpload"
 import { SummaryStatistics } from "@/components/Templates/SummaryStatistics"
+import { useStateControllerMetrics } from "@/hooks/useStateControllerMetrics"
+import { ChartsAndGraphs } from "@/components/Templates/ChartsAndGraphs"
 
 export default function Home() {
+  const { shipmentData } = useStateControllerMetrics()
+
   return (
     <div>
       <AppBar>
@@ -35,9 +41,13 @@ export default function Home() {
           </Toolbar>
           <ControlledAccordion>
             <div title="Summary Statistics">
-              <SummaryStatistics />
+              <SummaryStatistics shipmentData={shipmentData} />
             </div>
-            <div title="Charts and Graphs"></div>
+
+            <div title="Charts and Graphs">
+              <ChartsAndGraphs shipmentData={shipmentData} />
+            </div>
+
             <div title="Shipment Management Table"></div>
             <div title="Consolidation Recommendations"></div>
           </ControlledAccordion>

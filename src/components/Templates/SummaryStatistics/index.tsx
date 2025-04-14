@@ -1,15 +1,16 @@
 "use client"
 
-const DEFAULT_STATS = {
-  totalShipments: 0,
-  warehouseUtilization: 0,
-  shipmentsByStatus: [],
-  consolidationOpportunities: [],
-}
+import { getShipmentDataFromProps_Safe } from "@/utils/helper"
 
-export const SummaryStatistics = ({ shipmentData }) => {
-  const { totalShipments, warehouseUtilization, shipmentsByStatus,consolidationOpportunities } =
-    shipmentData || DEFAULT_STATS
+export const SummaryStatistics = (props) => {
+  const { shipmentData } = getShipmentDataFromProps_Safe(props)
+
+  const {
+    totalShipments,
+    warehouseUtilization,
+    shipmentsByStatus,
+    consolidationOpportunities,
+  } = shipmentData
 
   const onTimeCount =
     shipmentsByStatus.find((s) => s.status === "delivered")?._count || 0
