@@ -6,19 +6,19 @@ follow and use the given Codespace url:
 
 OR
 
-1. Setup local by Clone repo then
+1. Setup local by Clone repo or download ZIP
 2. Install libs & setup Sqlite db 
 ```
 npm install
 npx prisma generate
 npx prisma db push
 ```
-3. Run this application in dev mode
+1. Run this application in dev mode
 ```
 npm run dev
 ```
 - OR
-3. Run this application in prod mode
+1. Run this application in prod mode
 ```
 npm run build
 npm run start
@@ -34,7 +34,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ### Backend:
 - NextJS /api
 - Prisma ORM with SQLite
-### Coding conversions:
+### Coding conventions:
 `Developing for scalability & good documentation`
 - Have designated folders for key areas (Eg: /components, /pages, /data )
 - Keep 1 class file, until class grows to need to be modularized into a folder  with `index.js` and its sub-files
@@ -125,7 +125,7 @@ Build a UI that allows users to:
 
   - [x] **Charts and Graphs**
 
-    - [xx] **Bar Chart**
+    - [x] **Bar Chart**
       - [x] Received count per carrier, per day
       - [ ] (Bonus: Any other useful metrics)
     - [x] **Pie Chart**
