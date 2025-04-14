@@ -21,10 +21,13 @@ import Link from "@mui/material/Link"
 
 export default function Home() {
   const stateControllerShipments = useStateControllerShipments()
-  const { shipmentData } = useStateControllerMetrics(
+  const stateControllerMetrics = useStateControllerMetrics(
     stateControllerShipments.currentPage,
     stateControllerShipments.filters
   )
+
+  const { setData_fetchShipments } = stateControllerShipments
+  const { shipmentData, setData_fetchMetrics } = stateControllerMetrics
 
   return (
     <div>
@@ -36,7 +39,7 @@ export default function Home() {
 
           <Box sx={{ flexGrow: 1 }} />
 
-          <Link href="/debug/kitchenSink" target="_" sx={{color:"white"}}>
+          <Link href="/debug/kitchenSink" target="_" sx={{ color: "white" }}>
             <SoupKitchenIcon />
           </Link>
         </Toolbar>
@@ -47,7 +50,12 @@ export default function Home() {
         <Box sx={{ my: 2 }}>
           <ControlledAccordion>
             <div title="Upload CSV Files">
-              <FileUpload />
+              <FileUpload
+                onSuccess={() => {
+                  setData_fetchShipments()
+                  setData_fetchMetrics()
+                }}
+              />
             </div>
           </ControlledAccordion>
 

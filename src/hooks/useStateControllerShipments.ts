@@ -93,5 +93,7 @@ export const useStateControllerShipments = () => {
     totalPages,
     onPageChange: handlePageChange,
     onFilterChange: handleFilterChange,
+
+    setData_fetchShipments,
   }
 }

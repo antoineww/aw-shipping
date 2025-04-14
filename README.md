@@ -68,10 +68,10 @@ Develop an API using **TypeScript** that:
 
 #### ✅ Processes the Data
 
-- [ ] **Validation and Cleaning**
+- [x] **Validation and Cleaning**
 
   - [x] Remove duplicates
-  - [ ] Handle missing values if necessary
+- [x] Handle missing values if necessary
 
 - [x] **Key Calculations**
 
@@ -124,23 +124,23 @@ Build a UI that allows users to:
         (x-axis: date, y-axis: number of packages received per day)
     - [ ] (Bonus: Any other useful metrics)
 
-  - [ ] **Shipment Management Table**
+  - [x] **Shipment Management Table**
 
-    - [ ] Search and filter shipments by:
-      - [ ] Status
-      - [ ] Destination
-      - [ ] Carrier
+    - [x] Search and filter shipments by:
+      - [x] Status
+      - [x] Destination
+      - [x] Carrier
     - [ ] Click a shipment to view details
 
   - [x] **Consolidation Recommendations** (Optional)
     - [x] Display groupable shipments
-    - [ ] Allow users to apply filters and generate a scoped CSV file
+    - [x] Allow users to apply filters and generate a scoped CSV file
 
 ---
 
 ### 3. ASA-6: Additional Considerations
 
-- [ ] Handle CSV files efficiently (assume over **1 million rows**)
+- [x] Handle CSV files efficiently (assume over **1 million rows**)
 - [x] Ensure good **UI/UX design**
 - [x] Provide **clear documentation** on setup and usage
 
