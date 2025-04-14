@@ -1,6 +1,6 @@
 "use client"
 
-import { getShipmentDataFromProps_Safe } from "@/utils/helper"
+import { getJSONDataView, getShipmentDataFromProps_Safe } from "@/utils/helper"
 
 export const SummaryStatistics = (props) => {
   const { shipmentData } = getShipmentDataFromProps_Safe(props)
@@ -25,5 +25,5 @@ export const SummaryStatistics = (props) => {
     consolidationOpportunities: consolidationOpportunities.length,
   }
 
-  return <>{<pre>{JSON.stringify(stats, null, 2)}</pre>}</>
+  return getJSONDataView(stats)
 }

@@ -4,6 +4,7 @@ import Button from "@mui/material/Button"
 import Backdrop from "@mui/material/Backdrop"
 import CircularProgress from "@mui/material/CircularProgress"
 import { useFileUpload } from "./useFileUpload"
+import { getJSONDataView } from "@/utils/helper"
 
 export default function FileUpload({ onSuccess = (a: any) => {} }) {
   const {
@@ -11,7 +12,7 @@ export default function FileUpload({ onSuccess = (a: any) => {} }) {
     handleFileUpload,
     isUploading,
     fileInputRef,
-    uploadedFileName,
+    uploadedFileData,
   } = useFileUpload({ onSuccess })
 
   return (
@@ -27,7 +28,7 @@ export default function FileUpload({ onSuccess = (a: any) => {} }) {
         disabled={isUploading}
         ref={fileInputRef}
       />
-      <pre>{uploadedFileName}</pre>
+      {Object.keys(uploadedFileData).length > 0 && getJSONDataView(uploadedFileData)}
 
       <Backdrop
         sx={(theme) => ({ color: "#fff", zIndex: theme.zIndex.drawer + 1 })}

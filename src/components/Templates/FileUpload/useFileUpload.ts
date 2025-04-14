@@ -3,7 +3,7 @@ import { useState, useRef } from "react"
 
 export const useFileUpload = ({ onSuccess = (a: any) => {} }) => {
   const [isUploading, setIsUploading] = useState(false)
-  const [uploadedFileName, setUploadedFileName] = useState("")
+  const [uploadedFileData, setuploadedFileData] = useState({})
   const fileInputRef = useRef(null)
 
   const handleFileUpload = async (
@@ -14,7 +14,7 @@ export const useFileUpload = ({ onSuccess = (a: any) => {} }) => {
 
     setIsUploading(true)
 
-    setUploadedFileName(file.name)
+    setuploadedFileData({ name: file.name })
 
     const formData = new FormData()
     formData.append("file", file)
@@ -27,9 +27,8 @@ export const useFileUpload = ({ onSuccess = (a: any) => {} }) => {
       const data: UploadResponse = await response.json()
       data.filename = file.name
 
-      setUploadedFileName(JSON.stringify(data, null, 2))
+      setuploadedFileData(data)
       onSuccess(data)
-
     } catch (error) {
       console.error("Error uploading file:", error)
     } finally {
@@ -48,6 +47,6 @@ export const useFileUpload = ({ onSuccess = (a: any) => {} }) => {
     handleFileUpload,
     isUploading,
     fileInputRef,
-    uploadedFileName,
+    uploadedFileData,
   }
 }
