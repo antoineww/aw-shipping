@@ -43,8 +43,8 @@ export const getJSONDataView_BareMinimum = (data: any) => {
 
 export const getJSONDataView_ButtonGroups = (data: any) => {
   const dataObjs = Object.keys(data).map((key, i) => (
-    <div className="my-2">
-      <ButtonGroup size="small" aria-label="Basic button group" key={i}>
+    <div className="my-2" key={`DataView_${i}`}>
+      <ButtonGroup size="small" aria-label="Basic button group">
         <Button variant="contained" className="w-[20vw] ">
           {camelOrSnakeToTitleCaseSentence(key)}
         </Button>
@@ -63,7 +63,8 @@ export const getJSONDataView = (data: any) => {
   } catch (error) {}
   return getJSONDataView_BareMinimum(data)
 }
-export const generateFilename = (baseFilename = "data", extension = "csv") => {
+
+export const getTimestamp = () => {
   const now = new Date()
 
   const year = now.getFullYear().toString().slice(-2)
@@ -74,7 +75,11 @@ export const generateFilename = (baseFilename = "data", extension = "csv") => {
   const seconds = String(now.getSeconds()).padStart(2, "0")
 
   const timestamp = `${year}_${month}_${date}_${hours}_${minutes}_${seconds}`
+  return timestamp
+}
 
+export const generateFilename = (baseFilename = "data", extension = "csv") => {
+  const timestamp = getTimestamp()
   return `${baseFilename}_${timestamp}.${extension}`
 }
 
