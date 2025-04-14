@@ -7,9 +7,11 @@ follow and use the given Codespace url: [Check this Codespace](http://localhost:
 
 ### Local setup
 - Clone repo
-- Install libs
+- Install libs & setup Sqlite db
 ```
 npm install
+npm prisma generate
+npm prisma db push
 ```
 - Run this application
 ```
@@ -52,7 +54,7 @@ Build a full-stack application that allows users to:
 
 - [x] Upload a CSV file containing freight shipment details
 - [ ] Process and validate the data
-- [ ] Display insights via a dashboard
+- [x] Display insights via a dashboard
 
 ---
 
@@ -103,7 +105,7 @@ Build a UI that allows users to:
 
 - [x] **Dashboard with Visual Insights**
 
-  - [ ] **Summary Statistics**
+  - [x] **Summary Statistics**
 
     - [x] Total shipments
     - [x] On-time vs. delayed shipments
@@ -111,14 +113,14 @@ Build a UI that allows users to:
 
   - [ ] **Charts and Graphs**
 
-    - [ ] **Bar Chart**
-      - [ ] Received count per carrier, per day
+    - [xx] **Bar Chart**
+      - [x] Received count per carrier, per day
       - [ ] (Bonus: Any other useful metrics)
-    - [ ] **Pie Chart**
-      - [ ] Shipment volume by mode (air or sea)
+    - [x] **Pie Chart**
+      - [x] Shipment volume by mode (air or sea)
       - [ ] Current warehouse utilization rate
-    - [ ] **Line Chart** (Optional)
-      - [ ] Warehouse capacity over the year  
+    - [x] **Line Chart** (Optional)
+      - [x] Warehouse capacity over the year  
         (x-axis: date, y-axis: number of packages received per day)
     - [ ] (Bonus: Any other useful metrics)
 
@@ -139,17 +141,17 @@ Build a UI that allows users to:
 ### 3. ASA-6: Additional Considerations
 
 - [ ] Handle CSV files efficiently (assume over **1 million rows**)
-- [ ] Ensure good **UI/UX design**
+- [x] Ensure good **UI/UX design**
 - [x] Provide **clear documentation** on setup and usage
 
 ---
 
 ## 🧪 EVALUATION CRITERIA
 
-- [ ] **Frontend:** Usability, design, and data visualization quality
-- [ ] **Backend:** API structure and data processing efficiency
+- [x] **Frontend:** Usability, design, and data visualization quality
+- [x] **Backend:** API structure and data processing efficiency
 - [ ] **Scalability:** Ability to handle large datasets efficiently
-- [ ] **Documentation & Code Quality**
+- [x] **Documentation & Code Quality**
 
 ---
 
