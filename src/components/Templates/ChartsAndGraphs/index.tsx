@@ -68,7 +68,7 @@ export const ChartsAndGraphs = (props) => {
       <div className="inline-block w-[40vw] h-[60vh] ">
         <Bar data={carrierChartData} />
       </div>
-      <div className="inline-block w-[40vw] h-[40vw] ">
+      <div className="inline-block w-[40vw] h-[30vw] ">
         <Pie data={modeChartData} />
       </div>
       <div className="inline-block w-[40vw] h-[60vh] ">
