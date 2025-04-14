@@ -19,6 +19,7 @@ import {
   CARRIERS_TYPES_SHIPMENTS,
   DESTINATION_TYPES_SHIPMENTS,
   downloadCSV,
+  generateFilename,
   STATUS_TYPES_SHIPMENTS,
 } from "@/utils/helper"
 import Button from "@mui/material/Button"
@@ -107,7 +108,10 @@ export default function ShipmentManagementTable({
           </Select>
         </FormControl>
 
-        <Button variant="contained" onClick={() => downloadCSV(shipments)}>
+        <Button
+          variant="contained"
+          onClick={() => downloadCSV(shipments, generateFilename())}
+        >
           <DownloadIcon />
           Download Current Shipments as CSV
         </Button>
