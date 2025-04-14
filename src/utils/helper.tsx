@@ -1,3 +1,6 @@
+import Button from "@mui/material/Button"
+import ButtonGroup from "@mui/material/ButtonGroup"
+
 export const DEFAULTS_PROPS_shipmentData = {
   shipmentData: {
     totalShipments: 0,
@@ -15,11 +18,49 @@ export const getShipmentDataFromProps_Safe = (props) => ({
   ...(props.shipmentData && { shipmentData: props.shipmentData }),
 })
 
+const snakeCaseToArray = (str = "") => str.split("_")
+const camelCaseToArray = (str = "") => str.replace(/([A-Z])/g, " $1")
+const titleCaseSentence = (words = []) => {
+  return words
+    .map(
+      (word, index) =>
+        index === 0
+          ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() // Capitalize first word
+          : word.toLowerCase() // Remaining words in lowercase
+    )
+    .join(" ") // Join words back into a sentence
+}
+export const camelOrSnakeToTitleCaseSentence = (str = "") => {
+  let strCam = camelCaseToArray(str)
+  const words = snakeCaseToArray(strCam)
+
+  return titleCaseSentence(words).trim()
+}
+
 export const getJSONDataView_BareMinimum = (data: any) => {
   return <pre>{JSON.stringify(data, null, 2)}</pre>
 }
 
+export const getJSONDataView_ButtonGroups = (data: any) => {
+  const dataObjs = Object.keys(data).map((key, i) => (
+    <div className="my-2">
+      <ButtonGroup size="small" aria-label="Basic button group" key={i}>
+        <Button variant="contained" className="w-[20vw] ">
+          {camelOrSnakeToTitleCaseSentence(key)}
+        </Button>
+        <Button variant="outlined" className="w-[20vw] ">
+          {data[key]}
+        </Button>
+      </ButtonGroup>
+    </div>
+  ))
+  return <>{dataObjs}</>
+}
+
 export const getJSONDataView = (data: any) => {
+  try {
+    if (!Array.isArray(data)) return getJSONDataView_ButtonGroups(data)
+  } catch (error) {}
   return getJSONDataView_BareMinimum(data)
 }
 
