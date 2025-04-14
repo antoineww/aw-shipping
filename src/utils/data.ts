@@ -2,11 +2,14 @@ import { writeFile } from "fs/promises"
 import { join } from "path"
 import { mkdir } from "fs/promises"
 import { parse } from "csv-parse/sync"
+import { parse as parseStream } from 'csv-parse';
 import { PrismaClient } from "@prisma/client"
+import { createReadStream, PathLike } from "fs"
 
 const prisma = new PrismaClient()
 const UPLOAD_DIR = join(process.cwd(), "uploads")
 const WAREHOUSE_CAPACITY = 60000000000 // 60 billion cm volume
+const CHUNK_SIZE = 500 // Smaller chunks for SQLite
 
 const createDirIfNotExists = async (path: string) => {
   try {
@@ -28,6 +31,15 @@ export const fileStore = async (file: File) => {
   return buffer
 }
 
+export const fileStoreForStream = async (file: File) => {
+  await createDirIfNotExists(UPLOAD_DIR)
+
+  const filePath = join(UPLOAD_DIR, file.name)
+  await writeFile(filePath, Buffer.from(await file.arrayBuffer()))
+
+  return filePath
+}
+
 export const csvReadAndParse = (buffer: Buffer<ArrayBuffer>) => {
   const csvContent = buffer.toString()
   const records = parse(csvContent, {
@@ -36,6 +48,18 @@ export const csvReadAndParse = (buffer: Buffer<ArrayBuffer>) => {
   })
 
   return records
+}
+
+export const csvReadAndParseForStream = (filePath: PathLike) => {
+  const parser = createReadStream(filePath).pipe(
+    parseStream({
+      columns: true,
+      skip_empty_lines: true,
+      bom: true,
+    })
+  )
+
+  return parser
 }
 
 export const recordProcessAndValidate = (record: any) => ({
@@ -81,6 +105,45 @@ export const dbStore = async (records: any) => {
   }
 
   return insertedCount
+}
+export const dbStoreViaStreamChunks = async (parser) => {
+  let processedCount = 0
+  let chunk: any[] = []
+
+  for await (const record of parser) {
+    const processedRecord = recordProcessAndValidate(record)
+    chunk.push(processedRecord)
+
+    if (chunk.length >= CHUNK_SIZE) {
+      await prisma.$transaction(async (tx) => {
+        for (const record of chunk) {
+          await tx.shipment.upsert({
+            where: { shipment_id: record.shipment_id },
+            update: record,
+            create: record,
+          })
+        }
+      })
+      processedCount += chunk.length
+      chunk = []
+    }
+  }
+
+  // Process remaining records
+  if (chunk.length > 0) {
+    await prisma.$transaction(async (tx) => {
+      for (const record of chunk) {
+        await tx.shipment.upsert({
+          where: { shipment_id: record.shipment_id },
+          update: record,
+          create: record,
+        })
+      }
+    })
+    processedCount += chunk.length
+  }
+
+  return processedCount
 }
 
 export const dbReadShipmentMetrics = async () => {
