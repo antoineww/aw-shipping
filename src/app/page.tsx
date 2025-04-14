@@ -6,6 +6,9 @@ import Toolbar from "@mui/material/Toolbar"
 import Typography from "@mui/material/Typography"
 import Box from "@mui/material/Box"
 import Container from "@mui/material/Container"
+import LocalShippingIcon from "@mui/icons-material/LocalShipping"
+import SoupKitchenIcon from "@mui/icons-material/SoupKitchen"
+
 import ControlledAccordion from "@/components/Globals/ControlledAccordion"
 import FileUpload from "@/components/Templates/FileUpload"
 import { SummaryStatistics } from "@/components/Templates/SummaryStatistics"
@@ -14,18 +17,28 @@ import { ChartsAndGraphs } from "@/components/Templates/ChartsAndGraphs"
 import { useStateControllerShipments } from "@/hooks/useStateControllerShipments"
 import { ConsolidationRecommendations } from "@/components/Templates/ConsolidationRecommendations"
 import ShipmentManagementTable from "@/components/Templates/ShipmentManagementTable"
+import Link from "@mui/material/Link"
 
 export default function Home() {
   const stateControllerShipments = useStateControllerShipments()
-  const { shipmentData } = useStateControllerMetrics(stateControllerShipments.currentPage, stateControllerShipments.filters)
+  const { shipmentData } = useStateControllerMetrics(
+    stateControllerShipments.currentPage,
+    stateControllerShipments.filters
+  )
 
   return (
     <div>
       <AppBar>
         <Toolbar>
           <Typography variant="h4" component="div">
-            AW Shipping App
+            AW Shipping App <LocalShippingIcon />
           </Typography>
+
+          <Box sx={{ flexGrow: 1 }} />
+
+          <Link href="/debug/kitchenSink" target="_" sx={{color:"white"}}>
+            <SoupKitchenIcon />
+          </Link>
         </Toolbar>
       </AppBar>
       <Toolbar />
@@ -53,10 +66,9 @@ export default function Home() {
             </div>
 
             <div title="Shipment Management Table">
-              <ShipmentManagementTable {...stateControllerShipments}/>
-
+              <ShipmentManagementTable {...stateControllerShipments} />
             </div>
-            
+
             <div title="Consolidation Recommendations">
               <ConsolidationRecommendations shipmentData={shipmentData} />
             </div>
