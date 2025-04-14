@@ -1,21 +1,27 @@
 # Antoine Wiles Shipping App
 
 Project can be hosted run via cloud; via GitHub Codespace,
-follow and use the given Codespace url: [Check this Codespace](http://localhost:3000).
+follow and use the given Codespace url: 
+1. [Check this Codespace](https://curly-spork-75jvrjrxrpj3wp7r.github.dev/).
 
-- Otherwise install locally as seen below:
+OR
 
-### Local setup
-- Clone repo
-- Install libs & setup Sqlite db
+1. Setup local by Clone repo then
+2. Install libs & setup Sqlite db 
 ```
 npm install
 npm prisma generate
 npm prisma db push
 ```
-- Run this application
+3. Run this application in dev mode
 ```
 npm run dev
+```
+- OR
+3. Run this application in prod mode
+```
+npm run build
+npm run start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -23,7 +29,11 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Design Decisions:
 ### UI:
-- Using Material Design
+- Using Material UI Design
+- Center Column Accordion dashboard for UI simplification
+### Backend:
+- NextJS /api
+- Prisma ORM with SQLite
 ### Coding conversions:
 `Developing for scalability & good documentation`
 - Have designated folders for key areas (Eg: /components, /pages, /data )
@@ -31,6 +41,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Keep /components purely functional with default props and/or self-state to ensure reusability with prop overwrite. Only use data injection in /pages.
 - `Title-case + camelcase` on /components, `lowercase + camelcase` everywhere else
 - Make variables simple to read and descriptive enough yet not overwhelming too read
+- Long/complex react hooks simplified into custom hooks via in same component folder or shared StateController hooks
+- Using useState, useEffect & props propagation to update data
 
 
 #
@@ -91,7 +103,7 @@ Develop an API using **TypeScript** that:
 
 - [x] Uploading CSV files (can be stored in file system)
 - [x] Retrieving shipment insights (metrics)
-- [ ] Fetching individual shipment details
+- [x] Fetching individual shipment details
 
 ---
 
@@ -130,7 +142,7 @@ Build a UI that allows users to:
       - [x] Status
       - [x] Destination
       - [x] Carrier
-    - [ ] Click a shipment to view details
+    - [x] Click a shipment to view details
 
   - [x] **Consolidation Recommendations** (Optional)
     - [x] Display groupable shipments
@@ -141,6 +153,7 @@ Build a UI that allows users to:
 ### 3. ASA-6: Additional Considerations
 
 - [x] Handle CSV files efficiently (assume over **1 million rows**)
+  - [x] Parse via file stream & insert in batches
 - [x] Ensure good **UI/UX design**
 - [x] Provide **clear documentation** on setup and usage
 
@@ -163,5 +176,7 @@ Build a UI that allows users to:
   - [x] How to set up and run the project
   - [x] Your design decisions
   - [x] Any trade-offs or assumptions made:
-    - using SQLite for demo purposes; BUT Postgres is ideal for this job; has built-in pagination, metrics & REST API capabitlies to handles huge sums of data; requiring less code handling
+    - using SQLite for demo purposes; BUT Postgres is ideal for this job to hit the 1 million rows upload comfortably; has built-in pagination, metrics & REST API capabitlies to handle huge sums of data out-of-box & via plugins; requiring less new code handling
     - Need to test&find load size csv files and metrics calcutions
+      - Currently parses 11MB file with 150,000 rows in under 2mins in dev mode (under 1min in prod mode)
+    - Followed most lint & type errors, but disabled for prod build for test-demo purposes
