@@ -64,6 +64,26 @@ export const getJSONDataView = (data: any) => {
   return getJSONDataView_BareMinimum(data)
 }
 
+export const downloadCSV = (data, filename = "data.csv") => {
+  const csvRows = []
+  const headers = Object.keys(data[0])
+  csvRows.push(headers.join(","))
+
+  data.forEach((row) => {
+    const values = headers.map((header) => JSON.stringify(row[header] || ""))
+    csvRows.push(values.join(","))
+  })
+
+  const csvString = csvRows.join("\n")
+  const blob = new Blob([csvString], { type: "text/csv" })
+  const link = document.createElement("a")
+  link.href = URL.createObjectURL(blob)
+  link.download = filename
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+}
+
 export const STATUS_TYPES_SHIPMENTS = [
   { value: "", text: "All Statuses" },
   { value: "intransit", text: "In Transit" },

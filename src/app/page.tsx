@@ -52,7 +52,7 @@ export default function Home() {
           </ControlledAccordion>
 
           <Toolbar>
-            <Typography variant="h4" component="div">
+            <Typography variant="h5" component="div">
               Dashboard with Visual Insights
             </Typography>
           </Toolbar>

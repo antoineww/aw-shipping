@@ -18,8 +18,11 @@ import { Shipment } from "@/hooks/useStateControllerShipments"
 import {
   CARRIERS_TYPES_SHIPMENTS,
   DESTINATION_TYPES_SHIPMENTS,
+  downloadCSV,
   STATUS_TYPES_SHIPMENTS,
 } from "@/utils/helper"
+import Button from "@mui/material/Button"
+import DownloadIcon from "@mui/icons-material/Download"
 
 interface ShipmentManagementTableProps {
   shipments: Shipment[]
@@ -103,6 +106,11 @@ export default function ShipmentManagementTable({
             ))}
           </Select>
         </FormControl>
+
+        <Button variant="contained" onClick={() => downloadCSV(shipments)}>
+          <DownloadIcon />
+          Download Current Shipments as CSV
+        </Button>
       </Box>
 
       <TableContainer component={Paper}>
