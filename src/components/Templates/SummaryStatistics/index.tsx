@@ -22,7 +22,7 @@ export const SummaryStatistics = (props) => {
     totalShipments,
     onTimeVsDelayedShipments,
     warehouseUtilization: `${warehouseUtilization.toFixed(2)}%`,
-    consolidationOpportunities: consolidationOpportunities.length,
+    consolidationRecommendations: consolidationOpportunities.length,
   }
 
   return getJSONDataView(stats)

@@ -18,8 +18,8 @@ export const ConsolidationRecommendations = (props) => {
   const { consolidationOpportunities } = shipmentData as ShipmentData
 
   return (
-    <Paper sx={{ p: 3 }}>
-      <TableContainer>
+    <Paper sx={{ p: 3  }}>
+      <TableContainer sx={{height: "50vh", scrollBehavior: "auto" }}>
         <Table size="small">
           <TableHead>
             <TableRow>
